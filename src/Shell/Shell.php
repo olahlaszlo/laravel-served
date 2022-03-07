@@ -69,7 +69,7 @@ class Shell
 
     protected function writeOutputBuffer() {
         return function ($type, $buffer) {
-            if (Process::ERR === $type) {
+            if (Process::ERR === $type && strpos(trim($buffer), 'WARNING: No blkio') === false) {
                 throw new ShellCommandFailedException('ERROR : : ' . trim($buffer));
 //                $this->output->writeln('ERROR : ' . $buffer);
             } else {
